@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+
+<head>
+    <style>
+        .grid-container-radial {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-template-rows: 50% 50%;
+            grid-column-gap: 0;
+            grid-row-gap: 0;
+            align-content: center;
+            z-index: 1000;
+            background-color: #ffffff00;
+            width: 100px;
+            height: 100px;
+            transform: rotate(45deg);
+        }
+
+        .grid-item {
+            background-color: rgba(255, 255, 255, 0);
+            text-align: center;
+        }
+
+        .turn-overlay {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDI2LjQ2IDI2LjQ2IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0xMS43IDI0LjA1Yy0uNzYtMS4yMi0xLjY1LTIuNjQtMS45OS0zLjE1LS44OC0xLjM1LS4yNS0xLjE1IDEuNTguNS44OC43OCAxLjcgMS40MyAxLjg0IDEuNDIuMTQgMCAxLjAzLS42NCAxLjk5LTEuNDIuOTUtLjc4IDEuOC0xLjM2IDEuODctMS4yOS4wNy4wOC0uMy44MS0uODQgMS42NC0uNTMuODMtMS4zNyAyLjE4LTEuODYgMy0uNS44My0uOTcgMS41LTEuMDUgMS41LS4wOC4wMS0uNzctLjk4LTEuNTMtMi4yem0yIC44NWwxLjQ0LTIuMjFjMS4xNS0xLjc5IDEuMDUtMS43OC0xLjA4LjFsLS43OS42OS0xLjU0LTEuMjZjLTEuMTQtLjkyLTEuNDItMS4wNi0xLjA4LS41NGwxLjQgMi4yMmMuNTIuODMgMS4wNCAxLjUgMS4xNCAxLjUuMTEgMCAuMzQtLjIyLjUyLS41em02LjUzLTcuOTdjMC0uMS42Ni0uOTIgMS40Ni0xLjgzLjgtLjkgMS40Ni0xLjc3IDEuNDYtMS45MSAwLS4xNS0uNjUtMS4wMi0xLjQ1LTEuOTVhOC4yNyA4LjI3IDAgMCAxLTEuMzQtMS44Yy4xOC0uMTggNi4wNyAzLjUgNi4wOCAzLjguMDEuMjMtNS43IDMuODYtNi4wOSAzLjg2LS4wNiAwLS4xMi0uMDgtLjEyLS4xN3ptNS42NC0zLjgyYy0uMTMtLjExLTEuMTYtLjc2LTIuMjgtMS40NWwtMi4wNC0xLjI0IDEuMSAxLjMzYzEuMjIgMS40NiAxLjIgMS43Ni0uMiAzLjA0LTEuMzYgMS4yNC0uOCAxLjE4IDEuNDUtLjE2IDEuMjItLjczIDIuMS0xLjQxIDEuOTctMS41MnpNMi45MyAxNS4wM0MxLjM3IDE0LjA0LjA5IDEzLjEuMDkgMTIuOTVjMC0uMjMgMy40MS0yLjQxIDUuNjQtMy42LjkzLS41LjU2LjIyLS45NCAxLjgzLS44Ljg2LTEuNDYgMS43LTEuNDYgMS44NCAwIC4xNi41Ljg1IDEuMSAxLjU0IDIuNSAyLjg2IDIuMzYgMi45LTEuNS40N3ptMS43LjI4Yy0uMy0uMzUtLjg4LTEtMS4yNy0xLjQybC0uNzEtLjc4IDEuMjctMS41IDEuMjgtMS40OC0xLjc2Ljk4Yy0zLjUxIDEuOTYtMy40NCAxLjY2LS44MSAzLjM1IDEuMjcuOCAyLjM2IDEuNDggMi40MiAxLjQ4LjA3LjAxLS4xMy0uMjctLjQzLS42M3pNOS43IDUuM2wyLTMuMTRhMTIuNyAxMi43IDAgMCAxIDEuNTgtMi4yMWMuMjYtLjAyIDQuMDQgNi4wOCAzLjg3IDYuMjUtLjIuMi0xLjItLjc4LTEuMi0xLjE4IDAtLjI4LTIuMTUtMy45OC0yLjU4LTQuNDYtLjEtLjEtMS40IDEuNzYtMi40OCAzLjUzbC0uNyAxLjE0IDEuNTEtMS4yNCAxLjUyLTEuMjQuOC41N2MxLjA0LjcyIDIgMS43NyAxLjY0IDEuNzctLjE1IDAtLjY2LS4zOS0xLjEyLS44Ni0uNDYtLjQ3LTEtLjg2LTEuMi0uODYtLjIgMC0xLjEyLjY1LTIuMDMgMS40My0xLjkzIDEuNjYtMi40OCAxLjgzLTEuNjEuNXoiLz48cGF0aCBkPSJNMTUuNTIgNC44NWMuMDUuMDMuMS4wNC4xMy4xdi4wM2guMDRjLjA0LjAzLjA2LjA5LjEuMS4wMi4wMi4wNCAwIC4wNiAwaC4wNHYuMDZoLjA2bC4wNS4wNmMuMDEgMCAuMDQtLjAyLjA0IDAgMCAwLS4xMi0uMDIgMCAuMDMuMTMuMDYtLjA0LS4wOS4xLjA2IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iLjI5Ii8+PC9zdmc+);
+
+            width: 100px;
+            height: 100px;
+            background-size: 90%;
+            background-repeat: no-repeat;
+            background-position-x: 5px;
+            background-position-y: 5px;
+            bottom: 10px;
+            right: 320px;
+            position: absolute;
+        }
+
+        .pan-overlay {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPiA8cGF0aCBkPSJtNDYuNzgxNTQ1IDk1LjA1Njk2NGEyMzUuOTYyMDkgMjM1LjAyMDk5IDAgMCAwLTMuNTU5MjQtNy45MDY3M2MtMi40MDI4NS00LjkyMzQxLTMuNTQwMjg4LTcuODA3Ni0zLjIyMjc1LTguMTI4NTkgMC42MTYxMS0wLjYxMzY1IDEuNjAxODkgMS4xNjEyMyA1LjU0MDI4IDkuOTE3NjMgMy40NjQ0NiA3LjcxNzkxNSA0LjA0MjY2IDguNzMyODE1IDQuNDM2MDIgNy43ODg3MjUgMC4yNTExOS0wLjU5NDc3NSAxLjQ0MDc2LTMuMjA1MTc1IDIuNjU0MDMtNS44MDE0MTUgMS4yMDg1My0yLjU5NjI0IDIuODA1NjktNi4wNDY4OCAzLjU0OTc2LTcuNjcwNzEgMC43NDQwOC0xLjYyMzgzIDEuNTI2MDctMi45NTAyNyAxLjczNDYtMi45NTAyNyAwLjIxMzI3IDAgMC4zODg2My0wLjMyMDk5IDAuMzg4NjMtMC43MDgwNyAwLTAuMzg3MDcgMC4yMTMyNy0wLjcwODA2IDAuNDczOTMtMC43MDgwNnMwLjQ3MzkzIDAuMTg0MSAwLjQ3MzkzIDAuNDA1OTZjMCAwLjM4NzA3LTQuMjI3NDkgOS44NTYyNi03LjA5NDc4IDE1Ljg3OTU0YTQxLjIwMzc5MSA0MS4wMzk0NTYgMCAwIDAtMS42NTg3NyAzLjg5NDM2NWMtMC42MDY2NCAyLjA0Mzk0MS0xLjU1NDUgMS4wMTk2MTEtMy43MTU2NC00LjAxMjM3NXptLTIuMjIyNzUtMjUuMzcyMzRjMC05LjEyNDYgMC4wOTk1LTEwLjYyMDk3IDAuNzEwOS0xMC42MjA5NyAwLjYxMTM3IDAgMC43MTA5IDEuNDE2MTMgMC43MTA5IDkuODc1MTQgMCA1LjQyODUtMC4xMjc5NiAxMC4yMTAzLTAuMjg0MzYgMTAuNjIwOTgtMC44NTMwOCAyLjIwOTE2LTEuMTM3NDQtMC4yNTk2Mi0xLjEzNzQ0LTkuODc1MTV6bTkuMDA0NzQtMC4wMzc4YzAtOC4zMjIxMyAwLjEyNzk2LTEwLjYyMDk4IDAuNTkyNDItMTAuNDY1MiAwLjQ0NTQ5IDAuMTQ2MzMgMC42MjU1OSAyLjc5OTIxIDAuNzIwMzcgMTAuNjU4NzQgMC4xMDkwMSA5LjEwMDk5IDAuMDMzMiAxMC40NjUyLTAuNTkyNDEgMTAuNDY1Mi0wLjYyMDg2IDAtMC43MjAzOC0xLjQzOTczLTAuNzIwMzgtMTAuNjU4NzR6bTI1LjU5MjQyLTkuNzI0MWMwLTAuNTUyMjkgMy40MTIzMi0yLjE5OTcyIDE2LjExMzc0LTcuNzgzOTkgMS45NTczNS0wLjg1OTEyIDMuMjUxMTgtMS41NjI0NyAyLjg4MTUyLTEuNTY3MTktMS4yNzQ4OS05ZS0zIC0xOC45NzYzMS04LjI2NTQ4LTE4Ljk4NTc5LTguODU1NTMtNWUtMyAtMC4zMjU3MSAwLjE1MTY2LTAuNTkwMDYgMC4zNDU5OC0wLjU5NDc4IDAuOTAwNDctOWUtMyAyMC45NjY4MjUgOS4yNjYyMiAyMC45NzE1NjUgOS42OTU3OCAwIDAuNDI0ODQtMTguODcyMDQ1IDkuMTgxMjQtMjAuNjQ0NTU1IDkuNTgyNDgtMC4zNzkxNSAwLjA4MDMtMC42ODI0Ni0wLjEzMjE3LTAuNjgyNDYtMC40NzIwNXptLTYxLjYxMTM3OS0xLjQyMDg1LTYuMzk4MTA0LTIuOTczODdhMzI4LjI5Mzg0IDMyNi45ODQ0OSAwIDAgMC02Ljk5MDUyMDgtMy4xMzQzN2MtMi4wMTQyMTgtMC44ODI2OC0zLjY3Mjk4Ni0xLjczMjM2LTMuNjcyOTg2LTEuODg4MTMgMC0wLjQ2MjYgMS44MjkzODQtMS41MTA1NCA1LjIxMzI3LTIuOTczODhhMzY4Ljk5NTI2IDM2Ny41MjM1OCAwIDAgMCA2Ljk5MDUyMDgtMy4xNDg1M2M2LjM1MDcxMS0yLjk1MDI3IDguNjYzNTA4LTMuODcwNzUgOC45NDc4NjgtMy41ODc1MyAwLjYxMTM3NCAwLjYwNDIyLTAuNjgyNDY1IDEuMzI2NDUtOS40MDc1ODMgNS4yNzc0NS01LjAyMzY5NjggMi4yNzA1My05LjE3NTM1NTggNC4xNjM0Mi05LjIyMjc0ODggNC4yMDExOS0wLjA0NzM5IDAuMDQyNSA0LjE2MTEzNyAxLjk4MjU4IDkuMzU1NDQ5OCA0LjMxNDQ3IDUuMTk0MzEzIDIuMzMxOSA5LjQ1MDIzNyA0LjUwMzMgOS40NTAyMzcgNC44MjkwMSAwIDAuODU0NC0wLjgxMDQyNiAwLjY3OTc0LTQuMjY1NDAzLTAuOTE1Nzd6bTIuODQzNjAyLTMuNDQ1OTFjMC0wLjYxMzY2IDEuNDQ1NDk4LTAuNzEyNzkgMTAuNzAxNDIyLTAuNzEyNzkgOC4zNTU0NSAwIDEwLjY2MzUwNSAwLjEyNzQ1IDEwLjUwNzEwNSAwLjU5MDA2LTAuMTQ2OTIgMC40NDM3Mi0yLjgxMDQyMiAwLjYyMzA5LTEwLjcwMTQxOCAwLjcxNzUtOS4xMzc0NCAwLjEwODU3LTEwLjUwNzEwOSAwLjAzMy0xMC41MDcxMDktMC41OTAwNXptMzguODYyNTU3LTVlLTNjMC0wLjYwODk0IDEuNDIxOC0wLjcwODA3IDkuOTE0NjktMC43MDgwNyA1LjQ1MDI0IDAgMTAuMjUxMTkgMC4xMjc0NSAxMC42NjM1MSAwLjI4MzIzIDIuMjE4MDEgMC44NDk2OC0wLjI2MDY2IDEuMTMyOS05LjkxNDY5IDEuMTMyOS05LjE2MTE0IDAtMTAuNjYzNTEtMC4wOTkxLTEwLjY2MzUxLTAuNzA4MDZ6bS0zOC4yNzAxNC04LjU3MjMxYy0yLjA0MjY1NC0wLjgyMTM2IDAuNTIxMzI3LTEuMTA0NTggMTAuMDcxMDktMS4xMDQ1OCA5LjE2MTE0IDAgMTAuNjYzNTEgMC4wOTkxIDEwLjY2MzUxIDAuNzA4MDYgMCAwLjYwODk0LTEuNDIxOCAwLjcwMzM1LTEwLjA3MTA5MyAwLjY3MDMtNS41NDAyODQtMC4wMTg5LTEwLjMzNjQ5Mi0wLjE0MTYxLTEwLjY2MzUwNy0wLjI3Mzc4em0zOC4zODg2My0wLjI3ODUxYzAuMTQ2OTItMC40NDM3MiAyLjgxMDQyLTAuNjIzMSAxMC43MDE0Mi0wLjcxNzUgOS4xMzc0NC0wLjEwODU3IDEwLjUwNzExLTAuMDMzMSAxMC41MDcxMSAwLjU5MDA1IDAgMC42MTgzOC0xLjQ0NTUgMC43MTc1MS0xMC43MDE0MyAwLjcxNzUxLTguMzU1NDUgMC0xMC42NjM1LTAuMTI3NDYtMTAuNTA3MS0wLjU5MDA2em0tMTQuMDE4OTYtNS4zOTA3M2MtMC4xNzUzNi0wLjE2OTk0LTAuMzE3NTQtNC45NTE3NC0wLjMxNzU0LTEwLjYyMDk4MiAwLTguODQxMzczIDAuMDk5NS0xMC4zMDQ3MDggMC43MTA5LTEwLjMwNDcwOCAwLjYxMTM4IDAgMC43MTA5IDEuNDk2Mzc4IDAuNzEwOSAxMC42MjA5NzcgMCA5LjY5NTc3My0wLjE2NTg3IDExLjI0NDA3My0xLjEwNDI2IDEwLjMwNDcxM3ptOC42ODcyLTkuNTU4ODg0YzAtNS40Mjg0OTkgMC4xMjc5Ni0xMC4yMTAyOTkgMC4yODQzNi0xMC42MjA5NzcgMC44NTMwOC0yLjIwOTE2NCAxLjEzNzQ0IDAuMjU5NjI0IDEuMTM3NDQgOS44NzUxNDggMCA5LjEyNDYwMy0wLjA5OTUgMTAuNjIwOTczLTAuNzEwOSAxMC42MjA5NzMtMC42MTEzNyAwLTAuNzEwOS0xLjQxNjEzLTAuNzEwOS05Ljg3NTE0NHptLTEzLjEyNzk2LTEwLjc3NjQzMmMwLjc3NzI1LTIuNTMwMTUyIDkuMTcwNjItMjAuNDE1ODc3NiA5LjU4Mjk0LTIwLjQxNTg3NzYgMC40NDA3NiAwIDkuMjMyMjMgMTguODIwMzcxNiA5LjYzNTA3IDIwLjYxODg1NjYgMC4wOTQ4IDAuNDQzNzIxLTAuMDkgMC42NTE0Mi0wLjQ3MzkzIDAuNTE5MjQ4LTAuNTIxMzMtMC4xNjUyMTUtMy4zOTgxMS02LjA0MjE1Ni04LjY5NjY5LTE3LjcxMTA2OTYtMC40MTIzMi0wLjkxMTA0NC0wLjk5MDUyIDAuMDk5MTMtNC40NjQ0NSA3Ljc5MzQzNjYtMi4xOTQzMSA0Ljg2MjA0OC00LjE5NDMxIDkuMTEwNDM5LTQuNDQwNzYgOS40MzE0MjgtMC42NjgyNSAwLjg3MzI4LTEuNDMxMjggMC43MTc1MDYtMS4xMzc0NC0wLjIzNjAyMnoiIHN0cm9rZS13aWR0aD0iLjQ3Mjk4NzU5Ii8+PC9zdmc+);
+            width: 100px;
+            height: 100px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            bottom: 10px;
+            right: 200px;
+            position: absolute;
+        }
+
+        #WFbutton svg {
+            height: 90%;
+            width: 90%;
+        }
+
+        .radial-Btn {
+            background-color: rgba(69, 69, 221, 0.25);
+        }
+
+        .obloid-Btn {
+            background-color: rgba(69, 69, 221, 0.25);
+        }
+
+        .zoom-Btn {
+            bottom: 60px;
+            right: 140px;
+            position: absolute;
+            width: 100px;
+        }
+
+        .view-Btn {
+            bottom: 30px;
+            right: 80px;
+            position: absolute;
+            width: 200px;
+            height: 20px
+        }
+
+        .wf-Btn {
+            bottom: 40px;
+            right: -200px;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pan-overlay" title="Pan Controls">
+        <div class="grid-container-radial">
+            <div class="grid-item">
+                <button class="radial-Btn" style="border-top: black 1px solid ;border-left: black 1px solid;border-top-left-radius:100%; width:50px; height: 50px;"
+                    onclick="alert('pan button 1')"></button>
+            </div>
+            <div class="grid-item">
+                <button class="radial-Btn" style="border-top: black 1px solid ;border-right: black 1px solid;border-top-right-radius:100%;width:50px; height: 50px;"
+                    onclick="alert('pan button 2')"></button>
+            </div>
+            <div class="grid-item">
+                <button class="radial-Btn" style="border-bottom: black 1px solid ;border-left: black 1px solid;border-bottom-left-radius:100%;width:50px; height: 50px;"
+                    onclick="alert('pan button 3')"></button>
+            </div>
+            <div class="grid-item">
+                <button class="radial-Btn" style="border-right: black 1px solid ;border-bottom: black 1px solid;border-bottom-right-radius:100%;width:50px;height:50px;"
+                    onclick="alert('pan button 4')"></button>
+            </div>
+        </div>
+    </div>
+    <div class="turn-overlay" title="Rotate Controls">
+        <div class="grid-container-radial">
+            <div class="grid-item">
+                <button class="radial-Btn" style="border-top: black 1px solid ;border-left: black 1px solid; border-top-left-radius: 100%; width: 50px; height: 50px;"
+                    onclick="alert('turn button 1')"></button>
+            </div>
+            <div class="grid-item">
+                <button class="radial-Btn" style="border-top: black 1px solid ;border-right: black 1px solid;  border-top-right-radius: 100%; width: 50px; height: 50px;"
+                    onclick="alert('turn button 2')"></button>
+            </div>
+            <div class="grid-item">
+                <button class="radial-Btn" style="border-bottom: black 1px solid ;border-left: black 1px solid;  border-bottom-left-radius: 100%; width: 50px; height: 50px;"
+                    onclick="alert('turn button 3')"></button>
+            </div>
+            <div class="grid-item">
+                <button class="radial-Btn" style="border-right: black 1px solid ;border-bottom: black 1px solid; border-bottom-right-radius: 100%; width: 50px; height: 50px;"
+                    onclick="alert('turn button 4')"></button>
+            </div>
+        </div>
+        <div class="zoom-Btn" title="Zoom -/+">
+            <button class="obloid-Btn" style="margin-right:0; width:40px; height: 20px; border-top-left-radius: 100%; border-bottom-left-radius: 100%; margin: 0;">-</button>
+            <button class="obloid-Btn" style="margin-left:0; width:40px; height: 20px; border-top-right-radius: 100%; border-bottom-right-radius: 100%; margin: 0;">+</button>
+        </div>
+        <div class="view-Btn" title="View Presets">
+            <button class="obloid-Btn" style="margin-right:0; width:50px; height: 20px; border-top-left-radius: 100%; border-bottom-left-radius: 100%; margin: 0;">Top</button>
+            <button class="obloid-Btn" style="margin-right:0; width:50px; height: 20px;  margin: 0; border-radius: 2px">Side</button>
+            <button class="obloid-Btn" style="margin-left:0; width:50px; height: 20px; border-top-right-radius: 100%; border-bottom-right-radius: 100%; margin: 0;">ISO</button>
+        </div>
+        <div class="wf-Btn" title="Wireframe toggle">
+            <button id="WFbutton" class="obloid-Btn" style="width: 50px; height: 40px; border-radius: 50%">
+                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="178.000000pt" height="187.000000pt" viewBox="0 0 178.000000 187.000000"
+                    preserveAspectRatio="xMidYMid meet">
+                    <g transform="translate(0.000000,187.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                        <path d="M496 1563 c-40 -51 -41 -55 -25 -82 12 -17 13 -17 33 3 l21 21 3 -52 c3 -51 4 -53 33 -53 l29 0 0 70 0 70 35 0 c31 0 35 3 35 25 0 26 -5 28 -86 39 -40 6 -43 4 -78 -41z"
+                        />
+                        <path d="M1353 1593 c-7 -2 -13 -16 -13 -29 0 -23 2 -24 76 -24 l76 0 -16 -25 c-21 -31 -20 -38 4 -53 18 -11 24 -9 50 20 l30 32 0 -67 0 -68 28 3 27 3 3 108 3 107 -128 -1 c-70 0 -134 -3 -140 -6z"
+                        />
+                        <path d="M536 1373 c-3 -4 -6 -30 -6 -59 l0 -53 -47 -3 c-44 -3 -48 -5 -51 -30 -3 -27 -2 -28 47 -28 l51 0 0 -45 c0 -41 2 -45 24 -45 25 0 36 21 36 73 0 15 4 27 9 27 5 0 12 8 14 18 4 13 5 11 6 -5 1 -22 5 -23 77 -23 l75 0 -3 28 -3 27 -85 1 -85 0 -5 54 c-4 42 -9 54 -27 61 -11 4 -24 5 -27 2z"
+                        />
+                        <path d="M286 1313 c-20 -21 -36 -41 -36 -45 0 -5 -7 -8 -15 -8 -12 0 -15 -19 -15 -110 l0 -110 30 0 30 0 0 80 0 80 60 0 c57 0 60 1 60 24 0 25 -16 36 -52 36 -17 0 -18 3 -8 15 7 8 9 15 5 15 -4 0 -2 7 5 15 10 12 10 18 0 30 -18 22 -25 19 -64 -22z"
+                        />
+                        <path d="M1275 1297 c-30 -30 -45 -37 -75 -37 -29 0 -41 -6 -53 -24 -9 -13 -13 -26 -10 -30 4 -3 30 -6 60 -6 l53 0 0 -34 c0 -26 5 -35 22 -39 33 -9 38 -1 38 60 0 45 5 62 22 80 l22 23 -21 22 -22 21 -36 -36z"
+                        />
+                        <path d="M537 933 c-4 -3 -7 -48 -7 -98 0 -79 -3 -94 -20 -110 -26 -23 -25 -34 3 -44 14 -6 29 -4 42 5 11 8 44 14 77 14 62 0 70 5 61 38 -5 19 -12 22 -54 22 l-49 0 0 68 c0 37 -3 77 -6 90 -6 21 -33 30 -47 15z"
+                        />
+                        <path d="M1567 874 c-4 -4 -7 -31 -7 -60 l0 -53 -82 -3 c-82 -3 -83 -3 -86 -30 -3 -28 -2 -28 52 -28 47 0 54 -3 49 -16 -3 -9 0 -20 8 -26 11 -8 10 -8 -5 -4 -13 4 -30 -5 -57 -33 -46 -45 -48 -58 -14 -67 21 -5 32 1 61 32 84 93 106 114 120 114 12 0 14 16 12 88 -3 79 -5 87 -23 90 -12 2 -24 0 -28 -4z"
+                        />
+                        <path d="M220 709 l0 -130 28 3 27 3 3 95 c4 130 -2 160 -33 160 l-25 0 0 -131z" />
+                        <path d="M1250 525 l0 -105 -45 0 c-43 0 -45 -1 -45 -30 l0 -30 71 0 c61 0 73 3 90 23 10 12 18 26 19 31 0 4 11 17 24 27 13 10 33 34 44 53 17 30 18 35 5 40 -29 12 -47 5 -74 -26 l-28 -33 -1 78 0 77 -30 0 -30 0 0 -105z"
+                        />
+                        <path d="M321 524 c-31 -36 -48 -49 -44 -35 3 11 2 32 -1 46 -6 22 -9 23 -31 13 -24 -11 -25 -15 -25 -100 l0 -89 93 3 c91 3 92 3 92 28 0 22 -5 25 -43 28 l-43 3 23 30 c13 17 35 43 49 57 45 46 41 71 -13 72 -3 0 -29 -25 -57 -56z"
+                        />
+                        <path d="M455 399 c-4 -12 -3 -25 2 -30 5 -5 70 -8 144 -7 l134 3 3 28 3 27 -140 0 c-133 0 -140 -1 -146 -21z" />
+                    </g>
+                </svg>
+            </button>
+        </div>
+</body>
+
+</html>
